@@ -1,0 +1,12 @@
+main: fr.flavio0834.invites.Main
+name: Invites
+version: 0.1
+commands:
+  invitedby:
+    description: Allows you to tell who invited you on the server. Can be used ONE TIME.
+    usage: /invitedby <player>
+    permission: invites.invitedby
+  invited:
+    description: Allows you to see who said you invited them on the server.
+    usage: /invited
+    permission: invites.invited
