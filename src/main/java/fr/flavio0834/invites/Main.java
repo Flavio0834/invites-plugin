@@ -9,6 +9,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 
 public final class Main extends JavaPlugin implements Listener {
     FileConfiguration config = getConfig();
+    InvitesManager invitesManager = new InvitesManager(this);
 
     @Override
     public void onEnable() {
@@ -20,10 +21,16 @@ public final class Main extends JavaPlugin implements Listener {
         this.getCommand("invitedby").setExecutor(new CommandInvitedBy());
         this.getCommand("invited").setExecutor(new CommandInvited());
     }
+
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
+        String playerName = player.getName();
 
-        Utils.log("Player " + player.getName() + " has joined the server!");
+        // Init the inviter to null for this player if it is his first join
+        invitesManager.loadInvites();
+        if (!invitesManager.isPlayerRegistered(playerName)) {
+            invitesManager.addInvite(playerName, null);
+        }
     }
 }
