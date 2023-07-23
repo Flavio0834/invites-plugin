@@ -1,12 +1,15 @@
-package fr.flavio0834.invites;
+package fr.flavio0834.invites.commands;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
+import fr.flavio0834.invites.utils.InvitesManager;
+import fr.flavio0834.invites.utils.Utils;
+
 import org.bukkit.command.CommandExecutor;
 
-public class CommandInvitedBy implements CommandExecutor {
+public class InvitedByCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (args.length != 1) {

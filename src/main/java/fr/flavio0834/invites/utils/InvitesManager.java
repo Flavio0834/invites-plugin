@@ -1,4 +1,4 @@
-package fr.flavio0834.invites;
+package fr.flavio0834.invites.utils;
 
 import org.bukkit.plugin.java.JavaPlugin;
 import org.json.simple.JSONObject;

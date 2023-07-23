@@ -1,4 +1,4 @@
-package fr.flavio0834.invites;
+package fr.flavio0834.invites.commands;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,9 +7,13 @@ import java.util.Map;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+
+import fr.flavio0834.invites.utils.InvitesManager;
+import fr.flavio0834.invites.utils.Utils;
+
 import org.bukkit.command.CommandExecutor;
 
-public class CommandInvited implements CommandExecutor {
+public class InvitedCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         InvitesManager invitesManager = new InvitesManager(Utils.getPlugin());

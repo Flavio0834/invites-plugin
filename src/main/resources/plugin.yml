@@ -10,3 +10,7 @@ commands:
     description: Allows you to see who said you invited them on the server.
     usage: /invited
     permission: invites.invited
+  invitereward:
+    description: Allows you to set the group that will be given to players that invites at least x players on the server, as a reward.
+    usage: /invitereward <number> <group>
+    permission: invites.invitereward
