@@ -14,3 +14,7 @@ commands:
     description: Allows you to set the group that will be given to players that invites at least x players on the server, as a reward. Admin command.
     usage: /invitereward <number> <group_name>
     permission: invites.invitereward
+  inviterewards:
+    description: Allows you to know all the groups that are given as a reward for inviting x players on the server. Admin command.
+    usage: /inviterewards
+    permission: invites.inviterewards

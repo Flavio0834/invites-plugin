@@ -36,6 +36,7 @@ public final class Main extends JavaPlugin implements Listener {
         this.getCommand("invitedby").setExecutor(new InvitedByCommand());
         this.getCommand("invited").setExecutor(new InvitedCommand());
         this.getCommand("invitereward").setExecutor(new InviteRewardCommand());
+        this.getCommand("inviterewards").setExecutor(new InviteRewardsCommand());
     }
 
     @EventHandler
