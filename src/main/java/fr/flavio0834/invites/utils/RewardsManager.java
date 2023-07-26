@@ -1,5 +1,6 @@
 package fr.flavio0834.invites.utils;
 
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -64,6 +65,7 @@ public class RewardsManager {
 
     public Map<String, String> getAllGroups() {
         Map<String, String> rewardsMap = new HashMap<>();
+
         for (Object key : rewardsData.keySet()) {
             String player = (String) key;
             String inviter = (String) rewardsData.get(key);
@@ -74,5 +76,23 @@ public class RewardsManager {
 
     public boolean isRewardDefined(String number) {
         return this.getAllGroups().keySet().contains(number);
+    }
+
+    public void checkRewardsState(Player player) {
+        InvitesManager invitesManager = new InvitesManager(Utils.getPlugin());
+
+        for (String number : this.getAllGroups().keySet()) {
+            if ((Integer.parseInt(number) <= invitesManager.getInvitedPlayers(player.getName()).size())
+                    && (!LuckpermsManager.isPlayerInGroup(player, this.getGroup(number)))) {
+                LuckpermsManager.addPlayerToGroup(player, this.getGroup(number));
+
+                player.sendMessage("Having invited " + invitesManager.getInvitedPlayers(player.getName()).size()
+                        + " player(s), you have been promoted to group " + this.getGroup(number) + " !");
+
+                Utils.log("Player " + player.getName() + " has been promoted to group " + this.getGroup(number)
+                        + " for having invited " + invitesManager.getInvitedPlayers(player.getName()).size()
+                        + " player(s).");
+            }
+        }
     }
 }

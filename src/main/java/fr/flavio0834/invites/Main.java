@@ -4,8 +4,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import fr.flavio0834.invites.commands.InvitedCommand;
 import fr.flavio0834.invites.commands.InviteRewardCommand;
+import fr.flavio0834.invites.commands.InviteRewardsCommand;
 import fr.flavio0834.invites.commands.InvitedByCommand;
 import fr.flavio0834.invites.utils.InvitesManager;
+import fr.flavio0834.invites.utils.RewardsManager;
 import fr.flavio0834.invites.utils.Utils;
 
 import org.bukkit.event.Listener;
@@ -17,6 +19,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 public final class Main extends JavaPlugin implements Listener {
     FileConfiguration config = getConfig();
     InvitesManager invitesManager = new InvitesManager(this);
+    RewardsManager rewardsManager = new RewardsManager(this);
 
     @Override
     public void onEnable() {
@@ -45,5 +48,8 @@ public final class Main extends JavaPlugin implements Listener {
         if (!invitesManager.isPlayerRegistered(playerName)) {
             invitesManager.addInvite(playerName, null);
         }
+
+        rewardsManager.loadRewards();
+        rewardsManager.checkRewardsState(player);
     }
 }
