@@ -1,8 +1,6 @@
 package fr.flavio0834.invites.commands;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -17,16 +15,26 @@ public class InvitedCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         InvitesManager invitesManager = new InvitesManager(Utils.getPlugin());
-        List<String> invitedPlayers = invitesManager.getInvitedPlayers(sender.getName());
+        List<String> invitedPlayers = null;
 
-        if (invitedPlayers.isEmpty()) {
-            sender.sendMessage(ChatColor.RED + "You have not invited anyone yet.");
+        if (args.length == 0) {
+            invitedPlayers = invitesManager.getInvitedPlayers(sender.getName());
+        } else if ((args.length == 1) && sender.hasPermission("invites.invited.other")) {
+            invitedPlayers = invitesManager.getInvitedPlayers(args[0]);
         } else {
-            sender.sendMessage("Number of invited players : " + ChatColor.GREEN + invitedPlayers.size());
-            sender.sendMessage(String.join(", ", invitedPlayers));
+            return false;
         }
 
-        Utils.log("Command /invited has been executed by " + sender.getName());
+        if (!invitedPlayers.isEmpty()) {
+            sender.sendMessage("Number of invited players : " + ChatColor.GREEN + invitedPlayers.size());
+            sender.sendMessage(String.join(", ", invitedPlayers));
+        } else {
+            sender.sendMessage(ChatColor.RED + (invitedPlayers.isEmpty() ? "You have not" : "This player has not")
+                    + " invited anyone yet.");
+        }
+
+        Utils.log(
+                "Command /invited has been executed by " + sender.getName() + "with args : " + String.join(" ", args));
         return true;
     }
 }

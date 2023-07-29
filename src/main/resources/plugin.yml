@@ -18,3 +18,7 @@ commands:
     description: Allows you to know all the groups that are given as a reward for inviting x players on the server. Admin command.
     usage: /inviterewards
     permission: invites.inviterewards
+permissions:
+  invites.invited.other:
+    description: Allows you to see who said a player invited them on the server.
+    default: op
