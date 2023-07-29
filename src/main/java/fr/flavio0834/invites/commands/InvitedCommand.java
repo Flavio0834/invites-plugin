@@ -7,6 +7,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
 import fr.flavio0834.invites.utils.InvitesManager;
+import fr.flavio0834.invites.utils.RewardsManager;
 import fr.flavio0834.invites.utils.Utils;
 
 import org.bukkit.command.CommandExecutor;
@@ -15,6 +16,7 @@ public class InvitedCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         InvitesManager invitesManager = new InvitesManager(Utils.getPlugin());
+        RewardsManager rewardsManager = new RewardsManager(Utils.getPlugin());
         List<String> invitedPlayers = null;
 
         if (args.length == 0) {
@@ -33,8 +35,12 @@ public class InvitedCommand implements CommandExecutor {
                     + " invited anyone yet.");
         }
 
+        int nextReward = Utils.FirstGreaterThanXInSet(rewardsManager.getAllGroups().keySet(), invitedPlayers.size());
+        sender.sendMessage("The next reward is waiting at " + nextReward + " invited players.");
+
         Utils.log(
                 "Command /invited has been executed by " + sender.getName() + "with args : " + String.join(" ", args));
+
         return true;
     }
 }
