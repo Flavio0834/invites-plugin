@@ -25,14 +25,18 @@ public class InvitesManager {
         this.invitesFile = new File(plugin.getDataFolder(), "invites.json");
         this.invitesData = new JSONObject();
 
-        // Charge les données depuis le fichier au démarrage du plugin
         loadInvites();
     }
 
     public void loadInvites() {
         if (!invitesFile.exists()) {
             try {
-                invitesFile.createNewFile();
+                boolean created = invitesFile.createNewFile();
+                if (created) {
+                    Utils.log("File invites.json created");
+                } else {
+                    Utils.log("File invites.json already exists");
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -43,6 +47,7 @@ public class InvitesManager {
                 if (obj instanceof JSONObject) {
                     invitesData.putAll((JSONObject) obj);
                 }
+                reader.close();
             } catch (IOException | ParseException e) {
                 e.printStackTrace();
             }
@@ -52,6 +57,7 @@ public class InvitesManager {
     private void saveInvites() {
         try (FileWriter writer = new FileWriter(invitesFile)) {
             writer.write(invitesData.toJSONString());
+            writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
