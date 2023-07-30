@@ -20,6 +20,8 @@ public class InvitedByCommand implements CommandExecutor {
         String inviter = invitesManager.getInviter(sender.getName());
         if (inviter != null) {
             sender.sendMessage(ChatColor.RED + "You already defined who invited you. This can't be changed.");
+        } else if (sender.getName().equals(args[0])) {
+            sender.sendMessage(ChatColor.RED + "You can't invite yourself.");
         } else {
             if (!invitesManager.isPlayerRegistered(args[0])) {
                 sender.sendMessage(ChatColor.RED + "This player is not registered.");

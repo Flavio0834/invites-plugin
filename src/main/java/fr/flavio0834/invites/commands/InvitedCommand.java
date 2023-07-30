@@ -31,7 +31,7 @@ public class InvitedCommand implements CommandExecutor {
             sender.sendMessage("Number of invited players : " + ChatColor.GREEN + invitedPlayers.size());
             sender.sendMessage(String.join(", ", invitedPlayers));
         } else {
-            sender.sendMessage(ChatColor.RED + (invitedPlayers.isEmpty() ? "You have not" : "This player has not")
+            sender.sendMessage(ChatColor.RED + (args.length == 0 ? "You have not" : "This player has not")
                     + " invited anyone yet.");
         }
 
@@ -39,7 +39,7 @@ public class InvitedCommand implements CommandExecutor {
         sender.sendMessage("The next reward is waiting at " + nextReward + " invited players.");
 
         Utils.log(
-                "Command /invited has been executed by " + sender.getName() + "with args : " + String.join(" ", args));
+                "Command /invited has been executed by " + sender.getName() + " with args : " + String.join(" ", args));
 
         return true;
     }
